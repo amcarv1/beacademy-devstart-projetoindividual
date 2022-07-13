@@ -49,7 +49,7 @@ class PortfolioController extends Controller
 
     public function NegotiateStockPurchase($StockId)
     {
-        $stock = Stock::find($StockId);
+        $stock = Stock::findOrFail($StockId);
 
         return view('portfolio.purchase', compact('stock'));
     }
@@ -81,12 +81,12 @@ class PortfolioController extends Controller
             $stock_in_portfolio->save();     
         }
 
-        return redirect()->route('portfolio.index');
+        return redirect()->route('portfolio.index')->with('msg', $request->quantity.' Ativo(s) de '.(Stock::find($purchase->stock_id))->name.' Adicionado(s)!');
     }
 
     public function NegotiateStockSale($StockId)
     {
-        $stock = Stock::find($StockId);
+        $stock = Stock::findOrFail($StockId);
 
         return view('portfolio.sale', compact('stock'));
     }
@@ -108,17 +108,33 @@ class PortfolioController extends Controller
         $stocks = json_decode($stocks, true);
         $idPortfolio = $stocks[0]['id'];
 
-        $status = DB::delete($raw_query, array($idPortfolio, $StockId, $request->quantity));
+        $stock_in_portfolio = DB::table('stocks_in_portfolios')
+        ->join('portfolios', 'stocks_in_portfolios.portfolio_id', '=', 'portfolios.id')
+        ->addSelect(DB::raw('COUNT(stocks_in_portfolios.stock_id)'))
+        ->where('portfolios.user_id', Auth::id())
+        ->groupBy('stocks_in_portfolios.stock_id')
+        ->get();
 
-        $sale = new Transaction();
-        $sale->user_id = Auth::id();
-        $sale->transaction_type = 2;
-        $sale->stock_id = $StockId;
-        $sale->created_at = $request->created_at;
-        $sale->quantity = $request->quantity;
-        $sale->value = ($request->value * $sale->quantity);
-        $sale->save();
-        return redirect()->route('portfolio.index');
+        $stock_in_portfolio = json_decode($stock_in_portfolio, true);  
+
+        $amountInPortfolio = ($stock_in_portfolio[0]['COUNT(stocks_in_portfolios.stock_id)']);
+
+        if($request->quantity <= $amountInPortfolio && $request->quantity > 0) {
+            $status = DB::delete($raw_query, array($idPortfolio, $StockId, $request->quantity));
+            $sale = new Transaction();
+            $sale->user_id = Auth::id();
+            $sale->transaction_type = 2;
+            $sale->stock_id = $StockId;
+            $sale->created_at = $request->created_at;
+            $sale->quantity = $request->quantity;
+            $sale->value = ($request->value * $sale->quantity);
+            $sale->save();
+            
+            return redirect()->route('portfolio.index')->with('msg', $request->quantity.' Ativo(s) de '.(Stock::find($sale->stock_id))->name.' Vendido(s)!');
+        }   else {
+                return redirect()->route('portfolio.sale', $StockId)->with('msg', 'Erro: Você digitou uma quantidade de venda inválida carteira!');
+        }   
+        
     }
 
     public function DeleteStock($stockId)
