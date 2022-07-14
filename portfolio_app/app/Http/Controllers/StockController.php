@@ -33,10 +33,6 @@ class StockController extends Controller
         }    
     }
 
-    public function show($id)
-    {
-        //
-    }
 
     public function edit($id)
     {
@@ -58,7 +54,7 @@ class StockController extends Controller
     public function destroy($id)
     {
         $stock = Stock::find($id);
-        $stock->delete(); // Easy right?
+        $stock->delete(); 
  
         return redirect('/stocks')->with('success', 'Stock removed.');
     }
@@ -82,7 +78,7 @@ class StockController extends Controller
     {
         $stock = Stock::find($id);
         $updatedQuote = self::getQuote($stock->ticket);
-        if ($updatedQuote) { //Not using eloquent::when, not a fan of syntactic sugar.
+        if ($updatedQuote) { 
             $stock->price = $updatedQuote;
             $stock->save();
             return redirect('/portfolio');
