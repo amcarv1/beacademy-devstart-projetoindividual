@@ -7,7 +7,7 @@
       <link data-optimized="2" rel="stylesheet" href="https://www.beacademy.com.br/wp-content/litespeed/cssjs/b4899.css?7be12" />
       <meta http-equiv="x-dns-prefetch-control" content="on">
       <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
-      <title>Be Academy - Be Academy</title>
+      <title>Meus Ativos App</title>
 
       <meta name="msapplication-TileImage" content="https://www.beacademy.com.br/wp-content/uploads/2019/11/cropped-FAV-300x300.png" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -62,7 +62,6 @@
                                                          <div class="elementor-button-wrapper">
                                                             <a href="http://educacao.beacademy.com.br/" class="elementor-button-link elementor-button elementor-size-sm elementor-animation-shrink" role="button">
                                                             <span class="elementor-button-content-wrapper">
-                                                            <span class="elementor-button-text">ÁREA DO ALUNO</span>
                                                             </span>
                                                             </a>
                                                          </div>

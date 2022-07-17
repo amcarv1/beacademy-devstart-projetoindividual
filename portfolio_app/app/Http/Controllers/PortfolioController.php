@@ -10,6 +10,7 @@ use App\Models\StocksInPortfolio;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use DataTables;
 
 class PortfolioController extends Controller
 {

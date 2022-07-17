@@ -7,6 +7,9 @@ use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+require realpath(dirname(__FILE__, 3)).'\Helpers\Awesome\Cotation.php';
+
+
 class StockController extends Controller
 {
 
@@ -108,7 +111,11 @@ class StockController extends Controller
             foreach($dados as $id){
                 $stock = Stock::find($id);
                 $updatedQuote = self::getQuote($stock->ticket);
-                $stock->price = $updatedQuote;
+                if ($stock->category == 1) {
+                    $stock->price = ($updatedQuote * dolarValue());
+                } else {
+                    $stock->price = $updatedQuote;
+                }
                 $stock->save();
             }
         }

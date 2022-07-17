@@ -27,7 +27,7 @@
                     @endforeach        
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">Venda</td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">{{ $sal->quantity }}</td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">{{ $sal->value }}</td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">R$ {{ $sal->value }}</td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">{{ date('d/m/Y', strtotime($sal->created_at)) }}</td>
                 </tr>
         @endforeach

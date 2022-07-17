@@ -25,7 +25,7 @@
 @endif
 
 @yield('conteudo')
-<table class="min-w-full leading-normal shadow-md rounded-lg overflow-hidden">
+<table class="datatables">
     <thead>
         <tr>
         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider text-center">NOME</th>
@@ -46,8 +46,8 @@
             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">{{ $stock['name'] }}</td>
             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">{{ $stock['ticket'] }}</td>
             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">{{ $stock['COUNT(stocks.id)'] }}</td>
-            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">{{ $stock['(COUNT(stocks.id) * stocks.price)'] }}</td>
-            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">{{ $stock['price'] }}</td>
+            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">R$ {{ $stock['(COUNT(stocks.id) * stocks.price)'] }}</td>
+            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">R$ {{ $stock['price'] }}</td>
 
             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                 <a href="{{ route('portfolio.purchase', $stock['id']) }}" class="bg-green-200 rounded-full py-2 px-4">Comprar</a>

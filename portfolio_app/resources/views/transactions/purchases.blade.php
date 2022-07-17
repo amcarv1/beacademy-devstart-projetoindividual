@@ -27,7 +27,7 @@
                     @endforeach
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">Compra</td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">{{ $purch->quantity }}</td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">{{ $purch->value }}</td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">R$ {{ $purch->value }}</td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">{{ date('d/m/Y', strtotime($purch->created_at)) }}</td>
                 </tr>
         @endforeach
