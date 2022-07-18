@@ -29,6 +29,13 @@
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">{{ $sal->quantity }}</td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">R$ {{ $sal->value }}</td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">{{ date('d/m/Y', strtotime($sal->created_at)) }}</td>
+                    <td class="text-center">
+                        <form action="{{ route('transactions.sale.destroy', $sal->id) }}" method="post">
+                                @method('DELETE')
+                                @csrf
+                                <button  type="submit" class="bg-red-300 rounded-full py-1 px-4 sm">Deletar</button>
+                        </form>
+                    </td>
                 </tr>
         @endforeach
     </tbody>

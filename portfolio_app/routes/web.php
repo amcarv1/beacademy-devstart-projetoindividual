@@ -3,6 +3,7 @@
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -44,8 +45,11 @@ Route::delete('/portfolio/{id}', [PortfolioController::class, 'DeleteStock'])->n
 // transactions routes
 Route::get('/transacoes', [TransactionController::class, 'TransactionsView'])->name('transactions.index');
 Route::get('/transacoes/compras', [TransactionController::class, 'PurchasesView'])->name('transactions.purchases');
+Route::delete('/transacoes/compras/{id}', [TransactionController::class, 'DestroyPurchaseTransaction'])->name('transactions.purchase.destroy');
 Route::get('/transacoes/vendas', [TransactionController::class, 'SalesView'])->name('transactions.sales');
+Route::delete('/transacoes/vendas/{id}', [TransactionController::class, 'DestroySaleTransaction'])->name('transactions.sale.destroy');
 
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 //Route::get('generate-pdf', [ProjectController::class, 'pdfview'])->name('generate-pdf');
 
 

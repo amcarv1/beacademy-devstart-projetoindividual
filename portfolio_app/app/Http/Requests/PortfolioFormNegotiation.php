@@ -16,7 +16,7 @@ class PortfolioFormNegotiation extends FormRequest
     public function rules()
     {
         return [
-            'quantity' =>  'required|numeric|min:1',
+            'quantity' =>  'required|numeric|min:1|',
             'value' =>  'required|numeric|min:1',
             'created_at' => 'required|date',
         ];

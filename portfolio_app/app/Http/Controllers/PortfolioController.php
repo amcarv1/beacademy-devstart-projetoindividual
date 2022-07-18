@@ -120,19 +120,21 @@ class PortfolioController extends Controller
         $stock_in_portfolio = json_decode($stock_in_portfolio, true);  
 
         $amountInPortfolio = ($stock_in_portfolio[0]['COUNT(stocks_in_portfolios.stock_id)']);
-
-        $status = DB::delete($raw_query, array($idPortfolio, $StockId, $request->quantity));
+        
         $sale = new Transaction();
         $sale->user_id = Auth::id();
         $sale->transaction_type = 2;
         $sale->stock_id = $StockId;
         $sale->created_at = $request->created_at;
-        $sale->quantity = $request->quantity;
-        $sale->value = ($request->value * $sale->quantity);
-        $sale->save();
-            
-        return redirect()->route('portfolio.index')->with('msg', $request->quantity.' Ativo(s) de '.(Stock::find($sale->stock_id))->name.' Vendido(s)!');
-            
+        if($amountInPortfolio >= $request->quantity) {    
+            $sale->quantity = $request->quantity;
+            $sale->value = ($request->value * $sale->quantity);
+            $status = DB::delete($raw_query, array($idPortfolio, $StockId, $request->quantity));
+            $sale->save();    
+            return redirect()->route('portfolio.index')->with('msg', $request->quantity.' Ativo(s) de '.(Stock::find($sale->stock_id))->name.' Vendido(s)!');
+        }   else {
+            return redirect()->route('portfolio.sale', $sale->stock_id)->with('msg', 'A quantidade vendida não pode ser maior que a possuída em carteira!');
+        }
     }
 
     public function DeleteStock($stockId)

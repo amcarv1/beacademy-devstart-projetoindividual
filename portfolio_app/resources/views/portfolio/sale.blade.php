@@ -8,7 +8,7 @@
 @include('includes.validations-form')
 
 @if(session('msg'))
-<p class="msg" style="background-color: #FF3232; text-color: white; border: 1px solid #C3E6BCB; width: 100%; margin-botton: 0; text-align: center; padding: 10px;"><strong>{{ session('msg') }}</strong></p>
+<p class="msg" style="background-color: #FF3232; text-color: white; border: 1px solid #C3E6BCB; width: 100%; margin-botton: 0; text-align: center; padding: 10px;"><strong>ERRO:</strong>{{ session('msg') }}</p>
 @endif
 
 <form method="post" action="{{ route('portfolio.sell', $stock->id) }}">

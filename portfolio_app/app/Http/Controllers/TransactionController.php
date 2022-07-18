@@ -65,4 +65,22 @@ class TransactionController extends Controller
            
     }
 
+    public function DestroyPurchaseTransaction($transactionId)
+    {
+
+        $transaction = Transaction::find($transactionId);
+        $transaction->delete();
+        return redirect('/transacoes/compras');
+
+    }
+
+    public function DestroySaleTransaction($transactionId)
+    {
+        
+        $transaction = Transaction::find($transactionId);
+        $transaction->delete();
+        return redirect('/transacoes/vendas');
+
+    }
+
 }
