@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div style="background-image: url('/images/purchase.jpg'); width: 1533px; height: 639px; margin: 0; padding: 0;">
+<div style="background-image: url('/images/purchase.jpg'); background-size: 1533px 800px; width: 1533px; height: 639px; margin: 0; padding: 0; background-repeat: no-repeat;">
     <div class="container w-50 text-center">
         <div>
         <h1 class="text-2xl font-semibold leading-tigh py-2"></h1>
